@@ -1,19 +1,6 @@
 ---
 version: '3'
 services:
-dbpostgre:
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=adminpostgres
-      - POSTGRES_PASSWORD=87654321
-    ports:
-      - '5433:5432'
-    volumes: 
-      - db:/var/lib/postgresql/data
-    restart: always
-volumes:
-  db:
-    driver: local
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
     hostname: zookeeper
@@ -37,3 +24,17 @@ volumes:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+  
+  dbpostgre:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=adminpostgres
+      - POSTGRES_PASSWORD=87654321
+    ports:
+      - '5433:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+    restart: always
+volumes:
+  db:
+    driver: local
